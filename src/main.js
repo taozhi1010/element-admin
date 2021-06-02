@@ -6,14 +6,16 @@ import router from './router'
 import store from './store'
 import api from './api'
 import less from 'less'
+import utils from '@/utils/utils'
 import './styles/index.less' // global css
-
+console.log(api)
 Vue.use(ElementUI);
 Vue.use(less)
+Vue.prototype.$api = api
+Vue.prototype.$utils = utils
 new Vue({
     el: '#app',
     router,
     store,
-    api,
     render: h => h(App)
 });

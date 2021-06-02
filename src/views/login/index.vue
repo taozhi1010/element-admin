@@ -4,7 +4,7 @@
             <p>ACFUN</p>
             <div class="admin">
                 <p>管理后台</p>
-                <el-input placeholder="账号" suffix-icon="el-icon-user" v-model="admin" class="input">
+                <el-input placeholder="账号" suffix-icon="el-icon-user" v-model="userName" class="input">
                 </el-input>
                 <el-input placeholder="密码" v-model="passWord" show-password class="input">
                 </el-input>
@@ -24,26 +24,30 @@
 export default {
     data() {
         return {
-            admin: "",
+            userName: "",
             passWord: "",
             code: ""
         }
     },
     methods: {
         login() {
-            localStorage.setItem("isLogin", true)
-            this.$router.push({ name: 'ManagerIndex' })
+            this.$api.login({ userName: this.userName, passWord: this.passWord }).then(res => {
+                console.log(res)
+                if (res.code == '1') {
+                    window.localStorage.setItem('token', res.data.token)
+                    this.$router.push({ name: 'ManagerIndex' })
+                }
+            })
         }
     }
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .main {
     height: 100%;
     width: 100%;
     background: linear-gradient(to top, #636363, #a2ab58);
-    padding-top: 50px;
     .center {
         width: 100%;
         display: flex;

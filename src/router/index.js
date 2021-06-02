@@ -28,13 +28,15 @@ const createRouter = () => new Router({
 
 const router = createRouter()
 
+
 //登陆鉴权 全局前置路由守卫
 router.beforeEach((to, from, next) => {
-    let isLogin = localStorage.getItem("isLogin");
-    if (to.name !== 'Login' && !isLogin) next({
-        name: 'Login'
-    })
-    else next()
+    // let isLogin = localStorage.getItem("isLogin");
+    // if (to.name !== 'Login' && !isLogin) next({
+    //     name: 'Login'
+    // })
+    // else next()
+    next()
 })
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
